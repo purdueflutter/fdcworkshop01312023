@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_workshop/MyHeader.dart';
 
 import 'MyStrengthBox.dart';
+import 'SecretScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -15,6 +16,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 0;
+
+  TextEditingController myController = TextEditingController();
 
   void setCounter() {
     setState(() {
@@ -160,6 +163,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               SizedBox(height: 20),
+              TextField(
+                controller: myController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Enter your name here",
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade300,
+                    shadowColor: Colors.green.shade600,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          SecretScreen(name: myController.text)));
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  width: 120,
+                  child: Text(
+                    "Do you think I'm awesome?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.teal.shade800,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ));
